@@ -498,39 +498,39 @@ QString MainWindow::saveToXML() const
 
         RecursivelyCreateXml(*scene, doc, root_element, root_node );
     }
-    root.appendChild( doc.createComment(COMMENT_SEPARATOR) );
+    // root.appendChild( doc.createComment(COMMENT_SEPARATOR) );
 
-    QDomElement root_models = doc.createElement("TreeNodesModel");
+    // QDomElement root_models = doc.createElement("TreeNodesModel");
 
-    for(const auto& tree_it: _treenode_models)
-    {
-        const auto& ID    = tree_it.first;
-        const auto& model = tree_it.second;
+    // for(const auto& tree_it: _treenode_models)
+    // {
+    //     const auto& ID    = tree_it.first;
+    //     const auto& model = tree_it.second;
 
-        if( BuiltinNodeModels().count(ID) != 0 )
-        {
-            continue;
-        }
+    //     if( BuiltinNodeModels().count(ID) != 0 )
+    //     {
+    //         continue;
+    //     }
 
-        QDomElement node = doc.createElement( QString::fromStdString(toStr(model.type)) );
+    //     QDomElement node = doc.createElement( QString::fromStdString(toStr(model.type)) );
 
-        if( !node.isNull() )
-        {
-            node.setAttribute("ID", ID);
+    //     if( !node.isNull() )
+    //     {
+    //         node.setAttribute("ID", ID);
 
-            for(const auto& port_it: model.ports)
-            {
-                const auto& port_name = port_it.first;
-                const auto& port = port_it.second;
+    //         for(const auto& port_it: model.ports)
+    //         {
+    //             const auto& port_name = port_it.first;
+    //             const auto& port = port_it.second;
 
-                QDomElement port_element = writePortModel(port_name, port, doc);
-                node.appendChild( port_element );
-            }
-        }
-        root_models.appendChild(node);
-    }
-    root.appendChild(root_models);
-    root.appendChild( doc.createComment(COMMENT_SEPARATOR) );
+    //             QDomElement port_element = writePortModel(port_name, port, doc);
+    //             node.appendChild( port_element );
+    //         }
+    //     }
+    //     root_models.appendChild(node);
+    // }
+    // root.appendChild(root_models);
+    // root.appendChild( doc.createComment(COMMENT_SEPARATOR) );
 
     return xmlDocumentToString(doc);
 }

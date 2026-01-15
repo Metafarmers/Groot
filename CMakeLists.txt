@@ -27,6 +27,7 @@ if(ament_cmake_FOUND)
   find_package(behaviortree_cpp_v3 REQUIRED)
 
   set(dependencies
+    ament_index_cpp
     behaviortree_cpp_v3
   )
 
